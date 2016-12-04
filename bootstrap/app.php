@@ -23,9 +23,12 @@ $app = new Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
 
-// $app->withFacades();
+//$aliases = [
+//    'Fractal' => Spatie\Fractal\FractalFacade::class,
+//];
 
-// $app->withEloquent();
+$app->withFacades();
+$app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -78,7 +81,10 @@ $app->singleton(
 |
 */
 
-// $app->register(App\Providers\AppServiceProvider::class);
+ $app->register(App\Providers\AppServiceProvider::class);
+ $app->register(App\Providers\HashServiceProvider::class);
+ $app->register(App\Providers\MobileDetectServiceProvider::class);
+ $app->register(Spatie\Fractal\FractalLumenServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 

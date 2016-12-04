@@ -8,6 +8,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -45,6 +46,20 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+
+        if($e instanceof ValidationException) {
+            $message = '';
+            $content = json_decode($e->getResponse()->getContent(), true);
+            foreach($content as $key=>$value) {
+                $message = is_array($value) ? $value[0] : $value;
+            }
+            return response()->json(['message'=>$message], 400);
+        }
+
+//        if($e instanceof NotFoundHttpException) {
+//            return response()->json(['message'=>'invalid Url'], 404);
+//        }
+
         return parent::render($request, $e);
     }
 }
