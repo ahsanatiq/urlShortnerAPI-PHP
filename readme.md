@@ -41,7 +41,7 @@ Recommend all-in-one Windows distributions that contain Apache, PHP, MySQL and o
 
 ### Install Composer
 
-##### Mac OSX
+##### Mac OSX / Linux
 
 `$ curl -sS https://getcomposer.org/installer | php`
 
@@ -71,15 +71,15 @@ create the sqlite database anywhere on the system
 
 copy and open the application config file
 
-`cp .env.example .env`
+`$ cp .env.example .env`
 
-`vim .env`
+`$ vim .env`
 
 set the sqlite database variable path `DB_DATABASE` to the file created above 
 
 run the migration to import the necessary table structure
 
-`php artisan migrate`
+`$ php artisan migrate`
 
 start the application 
 
