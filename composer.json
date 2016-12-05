@@ -29,11 +29,8 @@
         ]
     },
     "scripts": {
-        "pre-install-cmd": [
-            "php -r \"copy('.env.example', '.env');\"",
-            "chown -R 0775 ./storage",
-            "touch ./storage/database.sqlite",
-            "php artisan migrate"
+        "post-root-package-install": [
+            "php -r \"copy('.env.example', '.env');\""
         ]
     },
     "minimum-stability": "dev",
