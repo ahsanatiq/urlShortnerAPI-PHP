@@ -2,11 +2,11 @@
 
 URL Shortening web service based on PHP [Lumen framework](http://lumen.laravel.com) 
 
-## Installation
+## Install Dependencies
 
 To run the web service, you will need
 
-* PHP >= 5.6.4, as well as few PHP extensions
+* PHP >= 5.6.4, as well as few PHP extensions (PDO, OpenSSL, MbString)
 * Composer 
 
 ### Install PHP 
@@ -25,7 +25,7 @@ Next, you need to tell brew about "homebrew-php" so you can install PHP 7
 
 `$ brew tap homebrew/php`
 
-`$ brew install php70`
+`$ brew install php56`
 
 ##### Windows
 
@@ -37,7 +37,7 @@ Recommend all-in-one Windows distributions that contain Apache, PHP, MySQL and o
 
 `$ sudo apt-get update`
 
-`$ sudo apt-get install php7.0`
+`$ sudo apt-get install php5.6`
 
 ### Install Composer
 
@@ -84,4 +84,17 @@ run the migration to import the necessary table structure
 start the application 
 
 `$ php -S localhost:8080 -t public/`
+
+## API Reference
+
+The URL Shortner API is organized around REST. Below is the list of endpoints.
+
+### End Points
+
+* [GET /](#get_urls.md)
+* [POST /](#post_home.md)
+* [GET {short_url}](#get_url.md)
+* [POST {short_url}](#post_url.md)
+
+### Get URLs
 
