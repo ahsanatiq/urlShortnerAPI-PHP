@@ -6,6 +6,9 @@ class urlShortnerTest extends TestCase
 {
     use DatabaseMigrations;
 
+    protected $user_agent_mobile = ['user-agent' => 'Mozilla/5.0 (Linux; U; Android 4.0.4; en-gb; GT-I9300 Build/IMM76D) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30'];
+    protected $user_agent_tablet = ['user-agent' => 'Mozilla/5.0(iPad; U; CPU iPhone OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B314 Safari/531.21.10'];
+
     public function test_index_should_return_message_when_empty()
     {
         $this->get('/')
@@ -27,7 +30,7 @@ class urlShortnerTest extends TestCase
                 'desktop_url' => $url->desktop_url,
                 'mobile_url' => $url->mobile_url,
                 'tablet_url' => $url->tablet_url
-            ])
+                ])
                 ->seeJsonStructure([
                     'data' => [['desktop_counter', 'mobile_counter', 'tablet_counter', 'created']]
                 ]);
@@ -163,14 +166,73 @@ class urlShortnerTest extends TestCase
         $this->get($short_url)
             ->seeStatusCode(302)
             ->seeHeader('Location', 'http://www.google.com');
+    }
 
-        $this->get($short_url, ['user-agent' => 'Mozilla/5.0 (Linux; U; Android 4.0.4; en-gb; GT-I9300 Build/IMM76D) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30'])
+    public function test_redirect_should_redirect_to_url_when_browser_is_mobile()
+    {
+        $short_url = $this->postValidRequest(['desktop_url' => 'http://www.google.com', 'mobile_url' => 'http://www.yahoo.com', 'tablet_url' => 'http://www.microsoft.com']);
+        $this->get($short_url, $this->user_agent_mobile)
             ->seeStatusCode(302)
             ->seeHeader('Location', 'http://www.yahoo.com');
+    }
 
-        $this->get($short_url, ['user-agent' => 'Mozilla/5.0(iPad; U; CPU iPhone OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B314 Safari/531.21.10'])
+    public function test_redirect_should_redirect_to_url_when_browser_is_tablet()
+    {
+        $short_url = $this->postValidRequest(['desktop_url' => 'http://www.google.com', 'mobile_url' => 'http://www.yahoo.com', 'tablet_url' => 'http://www.microsoft.com']);
+        $this->get($short_url, $this->user_agent_tablet)
             ->seeStatusCode(302)
             ->seeHeader('Location', 'http://www.microsoft.com');
+    }
+
+    public function test_counter_should_increment_when_redirect()
+    {
+        $short_url = $this->postValidRequest(['desktop_url' => 'http://www.google.com', 'mobile_url' => 'http://www.yahoo.com', 'tablet_url' => 'http://www.microsoft.com']);
+        $this->get($short_url);
+        $this->post($short_url)
+            ->seeStatusCode(200)
+            ->seeJson([
+                'desktop_counter' => '1'
+            ]);
+        $this->get($short_url);
+        $this->post($short_url)
+            ->seeStatusCode(200)
+            ->seeJson([
+                'desktop_counter' => '2'
+            ]);
+
+        $this->get($short_url, $this->user_agent_mobile);
+        $this->post($short_url)
+            ->seeStatusCode(200)
+            ->seeJson([
+                'desktop_counter' => '2',
+                'mobile_counter' => '1'
+            ]);
+
+        $this->get($short_url, $this->user_agent_mobile);
+        $this->post($short_url)
+            ->seeStatusCode(200)
+            ->seeJson([
+                'desktop_counter' => '2',
+                'mobile_counter' => '2'
+            ]);
+
+        $this->get($short_url, $this->user_agent_tablet);
+        $this->post($short_url)
+            ->seeStatusCode(200)
+            ->seeJson([
+                'desktop_counter' => '2',
+                'mobile_counter' => '2',
+                'tablet_counter' => '1'
+            ]);
+
+        $this->get($short_url, $this->user_agent_tablet);
+        $this->post($short_url)
+            ->seeStatusCode(200)
+            ->seeJson([
+                'desktop_counter' => '2',
+                'mobile_counter' => '2',
+                'tablet_counter' => '2'
+            ]);
     }
 
     public function postValidRequest($params)
