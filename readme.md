@@ -91,10 +91,97 @@ The URL Shortner API is organized around REST. Below is the list of endpoints.
 
 ### End Points
 
-* [GET /](#get_urls)
-* [POST /](#post_home.md)
-* [GET {short_url}](#get_url.md)
-* [POST {short_url}](#post_url.md)
+* [GET /](#get-urls)
+* [POST /](#post-url)
+* [POST {short_url}](#update-url)
+* [GET {short_url}](#redirect-url)
 
 ### Get URLs
 
+Get the list of all the URLs which includes (target url for desktop/mobile/table, counter, created) 
+
+Example: (GET) http://example.com/
+
+Response body:
+ 
+    {
+      "data": [
+        {
+          "desktop_url": "http://www.google.com/",
+          "desktop_counter": "1",
+          "mobile_url": "http://www.yahoo.com/",
+          "mobile_counter": "0",
+          "tablet_url": null,
+          "tablet_counter": "0",
+          "created": "1 minute ago"
+        },
+        {
+          "desktop_url": "http://www.google.com/",
+          "desktop_counter": "0",
+          "mobile_url": "http://www.yahoo.com/",
+          "mobile_counter": "0",
+          "tablet_url": null,
+          "tablet_counter": "0",
+          "created": "19 seconds ago"
+        }
+      ]
+    } 
+    
+### POST URL
+
+Create new URL entry which returns short url as response
+ 
+Example: (POST) http://example.com/ 
+
+Params: 
+
+| param name  | rules               | detail                             |
+|-------------|---------------------|------------------------------------|
+| desktop_url | required, valid url | target url for desktop user-agents |
+| mobile_url  | optional, valid url | target url for mobile devices      |
+| tablet_url  | optional, valid url | target url for tablet devices      |
+
+Response Body: 
+
+    {
+      "short_url": "http://example.com/0lrPb"
+    }
+    
+### Update URL
+
+Update URL entry which returns updated url info as response
+ 
+Example: (POST) http://example.com/L70nK 
+
+Params: 
+
+| param name  | rules               | detail                             |
+|-------------|---------------------|------------------------------------|
+| desktop_url | optional, valid url | target url for desktop user-agents |
+| mobile_url  | optional, valid url | target url for mobile devices      |
+| tablet_url  | optional, valid url | target url for tablet devices      |
+    
+Response Body:
+    
+    {
+      "data": {
+        "desktop_url": "http://carbon.nesbot.com/",
+        "desktop_counter": "0",
+        "mobile_url": null,
+        "mobile_counter": "0",
+        "tablet_url": null,
+        "tablet_counter": "0",
+        "created": "1 day ago"
+      }
+    }
+    
+### Redirect URL 
+
+Redirect to target url according to the device used   
+
+Example: (POST) http://example.com/L70nK 
+
+Response Body:
+
+Redirected to the target URL and see the content of the target page.    
+    
