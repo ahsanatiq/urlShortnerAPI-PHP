@@ -204,4 +204,5 @@ Refer to the [PHPUnit website](https://phpunit.de/manual/current/en/installation
 All the unit tests are inside the `tests/urlShortnerTest.php` file and can be run simply by the following command
 
 `$ cd path/to/urlShortnerAPI-PHP`
+
 `$ phpunit`
