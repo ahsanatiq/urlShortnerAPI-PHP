@@ -91,7 +91,7 @@ The URL Shortner API is organized around REST. Below is the list of endpoints.
 
 ### End Points
 
-* [GET /](#get_urls.md)
+* [GET /](#get_urls)
 * [POST /](#post_home.md)
 * [GET {short_url}](#get_url.md)
 * [POST {short_url}](#post_url.md)
