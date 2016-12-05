@@ -31,7 +31,9 @@
     "scripts": {
         "post-root-package-install": [
             "php -r \"copy('.env.example', '.env');\"",
-            ""
+            "chown -R 0775 ./storage",
+            "touch ./storage/database.sqlite",
+            "php artisan migrate"
         ]
     },
     "minimum-stability": "dev",

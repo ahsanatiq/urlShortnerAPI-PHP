@@ -45,7 +45,7 @@ class urlController extends Controller
     {
         $this->validate($request, Url::rules());
         $newUrl = Url::create($request->all());
-        return ['short_url' => url(env('APP_URL','localhost').'/'.$hashIds->encode($newUrl->id))];
+        return ['short_url' => url(app('url')->asset($hashIds->encode($newUrl->id)))];
     }
 
     public function update($hashId, Request $request, Hashids $hashids)
