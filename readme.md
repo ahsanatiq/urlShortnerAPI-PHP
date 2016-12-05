@@ -61,7 +61,27 @@ Checkout the latest version from github repo
 
 `$ cd urlShortnerAPI-PHP`
 
+install all the dependencies through the composer package manager
+
 `$ composer install`
 
-`$ php artisan serve`
+create the sqlite database anywhere on the system
+
+`$ touch database/database.sqlite`
+
+copy and open the application config file
+
+`cp .env.example .env`
+
+`vim .env`
+
+set the sqlite database variable path `DB_DATABASE` to the file created above 
+
+run the migration to import the necessary table structure
+
+`php artisan migrate`
+
+start the application 
+
+`$ php -S localhost:8080 -t public/`
 
