@@ -179,9 +179,29 @@ Response Body:
 
 Redirect to target url according to the device used   
 
-Example: (POST) http://example.com/L70nK 
+Example: (GET) http://example.com/L70nK 
 
 Response Body:
 
 Redirected to the target URL and see the content of the target page.    
+
+## Run Tests
     
+Inorder to run the tests, first need to install PHPUnit
+
+#### Mac OSX / Linux
+
+`$ wget https://phar.phpunit.de/phpunit.phar`
+
+`$ chmod +x phpunit.phar`
+
+`$ sudo mv phpunit.phar /usr/local/bin/phpunit`
+
+#### Windows 
+
+Refer to the [PHPUnit website](https://phpunit.de/manual/current/en/installation.html)
+
+All the unit tests are inside the `tests/urlShortnerTest.php` file and can be run simply by the following command
+
+`$ cd path/to/urlShortnerAPI-PHP`
+`$ phpunit`
