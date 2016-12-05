@@ -1,21 +1,61 @@
-# Lumen PHP Framework
+# URL Shortner Web Service in PHP
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/lumen-framework/v/unstable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
+URL Shortening web service based on PHP [Lumen framework](http://lumen.laravel.com) 
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+## Installation
 
-## Official Documentation
+To run the web service, you will need
 
-Documentation for the framework can be found on the [Lumen website](http://lumen.laravel.com/docs).
+* PHP >= 5.6.4, as well as few PHP extensions
+* Composer 
 
-## Security Vulnerabilities
+### Install PHP 
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+##### Mac OSX
 
-## License
+Recommend using package manager [Homebrew](http://brew.sh/)
 
-The Lumen framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+`/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+
+Next, you need to tell brew about "homebrew-php" so you can install PHP 7
+
+`$ brew tap homebrew/dupes`
+
+`$ brew tap homebrew/versions`
+
+`$ brew tap homebrew/php`
+
+`brew install php70`
+
+##### Windows
+
+Recommend all-in-one Windows distributions that contain Apache, PHP, MySQL and other applications in a single installation file, e.g. [XAMPP](https://www.apachefriends.org/index.html)
+
+##### Linux (Ubuntu 14.04, 15.04, 15.10, and 16.04)
+
+`sudo add-apt-repository ppa:ondrej/php`
+
+`sudo apt-get update`
+
+`sudo apt-get install php7.0`
+
+### Install Composer
+
+##### Mac OSX
+
+`curl -sS https://getcomposer.org/installer | php`
+
+`mv composer.phar /usr/local/bin/composer`
+
+Now just run `composer` in order to run Composer 
+
+##### Windows
+
+Download and run [Composer-Setup.exe](https://getcomposer.org/Composer-Setup.exe). It will install the latest Composer version and set up your PATH so that you can just call composer from any directory in your command line.
+
+## Setup and run service
+
+Checkout the latest version from github repo 
+
+`git clone `
+
