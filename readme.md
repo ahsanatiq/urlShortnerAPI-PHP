@@ -25,7 +25,7 @@ Next, you need to tell brew about "homebrew-php" so you can install PHP 7
 
 `$ brew tap homebrew/php`
 
-`brew install php70`
+`$ brew install php70`
 
 ##### Windows
 
@@ -33,19 +33,19 @@ Recommend all-in-one Windows distributions that contain Apache, PHP, MySQL and o
 
 ##### Linux (Ubuntu 14.04, 15.04, 15.10, and 16.04)
 
-`sudo add-apt-repository ppa:ondrej/php`
+`$ sudo add-apt-repository ppa:ondrej/php`
 
-`sudo apt-get update`
+`$ sudo apt-get update`
 
-`sudo apt-get install php7.0`
+`$ sudo apt-get install php7.0`
 
 ### Install Composer
 
 ##### Mac OSX
 
-`curl -sS https://getcomposer.org/installer | php`
+`$ curl -sS https://getcomposer.org/installer | php`
 
-`mv composer.phar /usr/local/bin/composer`
+`$ mv composer.phar /usr/local/bin/composer`
 
 Now just run `composer` in order to run Composer 
 
@@ -57,5 +57,11 @@ Download and run [Composer-Setup.exe](https://getcomposer.org/Composer-Setup.exe
 
 Checkout the latest version from github repo 
 
-`git clone `
+`$ git clone https://github.com/ahsanatiq/urlShortnerAPI-PHP.git`
+
+`$ cd urlShortnerAPI-PHP`
+
+`$ composer install`
+
+`$ php artisan serve`
 
