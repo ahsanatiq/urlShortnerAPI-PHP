@@ -29,7 +29,7 @@
         ]
     },
     "scripts": {
-        "post-root-package-install": [
+        "pre-install-cmd": [
             "php -r \"copy('.env.example', '.env');\"",
             "chown -R 0775 ./storage",
             "touch ./storage/database.sqlite",
